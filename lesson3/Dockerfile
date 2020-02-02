@@ -1,31 +1,25 @@
-FROM php:7.3-fpm
+FROM ubuntu
 
-RUN apt-get update && apt-get install -y \
-curl \
-wget \
-git \
-libfreetype6-dev \
-libjpeg62-turbo-dev \
-libxslt-dev \
-libicu-dev \
-libmcrypt-dev \
-libpng12-dev \
-libxml2-dev \
+ENV DEBIAN_FRONTEND=noninteractive
 
-&& docker-php-ext-install -j$(nproc) iconv mcrypt mbstring mysqli pdo_mysql zip \
-&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-&& docker-php-ext-install -j$(nproc) gd
+RUN apt-get clean && apt-get -y update && apt-get install -y locales curl software-properties-common git
 
-RUN docker-php-ext-configure intl
-RUN docker-php-ext-install intl
-RUN docker-php-ext-install xsl
-RUN docker-php-ext-install soap
+RUN apt-get install -y nginx nano
 
+RUN add-apt-repository ppa:ondrej/php
+RUN apt-get update
+RUN apt-get install -y php7.3-bz2 php7.3-cli php7.3-curl php7.3-dev php7.3-fpm
+
+COPY nginx/info.conf /etc/nginx/sites-available/default
 COPY nginx/info.php /var/www/html/index.php
 
-COPY nginx/info.conf /etc/nginx/conf.d/info.conf
-RUN rm /etc/nginx/conf.d/default.conf
 
+RUN echo '#!/bin/bash' >> /root/start.sh \
+ && echo '/usr/sbin/service php7.3-fpm start' >> /root/start.sh \
+ && echo '/usr/sbin/service nginx start' >> /root/start.sh \
+ && echo 'tail -f /dev/null' >> /root/start.sh \
+ && chmod +x /root/start.sh
 
+WORKDIR /root
 
-EXPOSE 8880
+CMD ["./start.sh"]
