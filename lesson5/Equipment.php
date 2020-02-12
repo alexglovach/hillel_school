@@ -1,41 +1,23 @@
 <?php
 
-
 class Equipment
 {
-    private $healthPoint;
+    private $healthPoints;
+    private $partOfBody;
 
-    private $bodyPart;
-
-    /**
-     * @return mixed
-     */
-    public function getHealthPoint()
+    public function __construct($healthPoints, $partOfBody)
     {
-        return $this->healthPoint;
+        $this->healthPoints = $healthPoints;
+        $this->partOfBody = $partOfBody;
     }
 
-    /**
-     * @param mixed $healthPoint
-     */
-    public function setHealthPoint($healthPoint)
+    public function getHealthPoints()
     {
-        $this->healthPoint = $healthPoint;
+        return $this->healthPoints;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBodyPart()
+    public function getPartOfBody()
     {
-        return $this->bodyPart;
-    }
-
-    /**
-     * @param mixed $bodyPart
-     */
-    public function setBodyPart($bodyPart)
-    {
-        $this->bodyPart = $bodyPart;
+        return $this->partOfBody;
     }
 }
