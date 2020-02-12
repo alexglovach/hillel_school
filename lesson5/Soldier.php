@@ -7,7 +7,7 @@ class Soldier
 {
     protected const DEFAULT_DAMAGE = 5;
     protected const MAX_WEAPON_SET_SIZE = 4;
-    protected const DEFAULT_LIFE = 100;
+    protected const DEFAULT_HEALTH = 100;
     protected $weaponDamage;
     protected $healthPoints;
     protected $allWeapons;
@@ -114,7 +114,7 @@ class Soldier
 
     protected function calcHealthPoints()
     {
-        $this->healthPoints = self::DEFAULT_LIFE;
+        $this->healthPoints = self::DEFAULT_HEALTH;
         if (is_null($this->allEquipments)) {
             return;
         }

@@ -2,7 +2,7 @@
 
 class Commander extends Soldier
 {
-    protected const DEFAULT_LIFE = 110;
+    protected const DEFAULT_HEALTH = 110;
 
     public function __construct()
     {
@@ -11,7 +11,7 @@ class Commander extends Soldier
         $this->setActiveWeapon('gun');
         $this->defaultEquipmentSet();
         foreach ($this->allEquipments as $equipment) {
-            $this->healthPoints = self::DEFAULT_LIFE + $equipment->getHealthPoints();
+            $this->healthPoints = self::DEFAULT_HEALTH + $equipment->getHealthPoints();
         }
     }
 
