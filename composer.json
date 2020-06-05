@@ -1,11 +1,13 @@
 {
   "name": "homework/hillel",
   "require": {
-    "psr/cache": "^1.0"
+    "psr/cache": "^1.0",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {
-      "lesson8\\": "lesson8/"
+      "lesson8\\": "lesson8/",
+      "lesson11\\": "lesson11/"
     }
   }
 }
